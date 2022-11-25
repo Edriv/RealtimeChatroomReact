@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { over } from "stompjs";
 import SockJS from "sockjs-client";
 
+import { ImUser } from "react-icons/im";
+
+import { IoMdPerson } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+
+
 var stompClient =null;
 const ChatRoom = () => {
     const [privateChats, setPrivateChats] = useState(new Map());     
@@ -122,9 +128,9 @@ const ChatRoom = () => {
         <div className="chat-box">
             <div className="member-list">
                 <ul>
-                    <li onClick={()=>{setTab("CHATROOM")}} className={`member ${tab==="CHATROOM" && "active"}`} id="chatroom">Chatroom</li>
+                    <li onClick={()=>{setTab("CHATROOM")}} className={`member ${tab==="CHATROOM" && "active"}`} id="chatroom">Sala común</li>
                     {[...privateChats.keys()].map((name,index)=>(
-                        <li onClick={()=>{setTab(name)}} className={`member ${tab===name && "active"}`} key={index}>{name}</li>
+                        <li onClick={()=>{setTab(name)}} className={`member ${tab===name && "active"}`} key={index}><ImUser id="iconoMember"/> {name}</li>
                     ))}
                 </ul>
             </div>
@@ -141,7 +147,7 @@ const ChatRoom = () => {
 
                 <div className="send-message">
                     <input type="text" className="input-message" value={userData.message} onChange={handleMessage} /> 
-                    <button type="button" className="send-button" onClick={sendValue}>sale</button>
+                    <button type="button" className="send-button" onClick={sendValue}><IoIosArrowForward id="iconoSend"/></button>
                 </div>
             </div>}
             {tab!=="CHATROOM" && <div className="chat-content">
@@ -157,7 +163,7 @@ const ChatRoom = () => {
 
                 <div className="send-message">
                     <input type="text" className="input-message" value={userData.message} onChange={handleMessage} /> 
-                    <button type="button" className="send-button" onClick={sendPrivateValue}>quiero esto:</button>
+                    <button type="button" className="send-button" onClick={sendPrivateValue}><IoIosArrowForward id="iconoSend"/></button>
                 </div>
             </div>}
         </div>
